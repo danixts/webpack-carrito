@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de compras en JavaScript</title>
+</head>
+
+<body class="bg-gray-900 pt-12 pb-32">
+  <div class="container">
+    <h1 class="
+          text-primary-500
+          font-semibold
+          tracking-wider
+          text-3xl text-center
+          mt-4
+          py-8
+        ">
+      Carrito de compras en JavaScript
+    </h1>
+    <!-- BOX -->
+    <div class="flex flex-row -mx-4">
+      <!-- CARDS -->
+      <div id="app-product" class="
+            grid
+            lg:grid-cols-2
+            xl:grid-cols-3
+            gap-6
+            w-full
+            lg:w-6/12
+            xl:w-8/12
+          "></div>
+      <!-- SIDEBAR -->
+      <div class="
+            w-full
+            lg:w-6/12
+            xl:w-4/12
+            bg-primary-600
+            shadow-lg
+            rounded-md
+            sticky
+            top-4
+            h-[70vh]
+            ml-4
+            grid
+            grid-rows-3-fix
+            overflow-hidden
+          ">
+        <!-- DESCRIPCION -->
+        <div>
+          <div class="flex flex-row justify-between px-4 py-3">
+            <h3 class="text-white font-semibold text-2xl">
+              Carrito de compras
+            </h3>
+            <button id="btn-clear"
+              class="flex justify-center items-center text-white w-8 h-8 p-1 bg-primary-800 rounded-full hover:bg-primary-700 transition-colors duration-500">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                </path>
+              </svg>
+            </button>
+          </div>
+          <div class="grid grid-cols-4 bg-primary-200 text-primary-900">
+            <span class="py-4 text-center">#</span>
+            <span class="py-4 text-center">Producto</span>
+            <span class="py-4 text-center">Cantidad</span>
+            <span class="py-4 text-center">Total</span>
+          </div>
+        </div>
+        <!-- PRODUCTOS -->
+        <div id="app-cart-list" class="overflow-y-auto h-full"></div>
+        <!-- MONTO Y CANTIDAD -->
+        <div id="app-cart-total" class="
+              bg-primary-700
+              text-white
+              flex flex-row
+              justify-between
+              px-6
+              items-center
+              rounded-b-md
+            "></div>
+      </div>
+    </div>
+  </div>
+  <template id="template-product">
+    <div class="bg-primary-600 rounded-lg group">
+      <img class="
+            w-full
+            mx-auto
+            transform
+            transition-transform
+            duration-300
+            group-hover:scale-110
+          " />
+      <div class="p-5 bg-primary-200 rounded-b-md">
+        <div class="flex flex-row justify-between items-center">
+          <span class="text-3xl text-primary-700 font-bold uppercase">Coco</span>
+          <div class="
+                bg-gradient-to-br
+                rounded-md
+                from-primary-500
+                to-primary-800
+              ">
+            <div class="
+                  text-2xl
+                  py-2
+                  px-2
+                  text-white
+                  font-bold
+                  shadow-lg
+                  transition-colors
+                  group-hover:text-primary-200
+                ">
+              <strong></strong><b class="text-sm ml-2 font-semibold group-hover:text-white">BOB</b>
+            </div>
+          </div>
+        </div>
+        <button class="
+              btn-buy
+              bg-primary-700
+              w-full
+              mt-4
+              py-3
+              shadow-lg
+              rounded-md
+              text-white
+              font-bold
+              text-xl
+              transition-all
+              duration-500
+              hover:bg-primary-800 hover:-translate-y-1
+            ">
+          Comprar
+        </button>
+      </div>
+    </div>
+  </template>
+  <template id="template-cart-list">
+    <div class="
+          grid grid-cols-4
+          bg-primary-100
+          text-primary-900
+          hover:bg-primary-200/90
+        ">
+      <span class="text-id py-4 text-center">2</span>
+      <span class="text-name py-4 text-center">Coco</span>
+      <div class="flex flex-row items-center justify-center space-x-4">
+        <button class="
+              btn-minus
+              bg-primary-600
+              px-2
+              text-lg
+              font-bold
+              text-white
+              rounded-full
+              w-7
+              h-7
+              hover:bg-primary-500
+            ">
+          -
+        </button>
+        <span class="text-qty">3</span>
+        <button class="
+              btn-plus
+              bg-primary-600
+              px-2
+              text-lg
+              font-bold
+              text-white
+              rounded-full
+              w-7
+              h-7
+              hover:bg-primary-500
+            ">
+          +
+        </button>
+      </div>
+      <span class="text-total py-4 text-center">120</span>
+    </div>
+  </template>
+  <template id="template-cart-total">
+    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+    <div class="uppercase">Cant: <b class="text-qty">120</b></div>
+    <div class="uppercase">Total: <b class="text-total">200</b></div>
+  </template>
+</body>
+
+</html>
